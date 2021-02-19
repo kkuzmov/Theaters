@@ -1,7 +1,7 @@
 // CHECKED!!
 
 const config = {
-    PORT: 4401,
+    PORT: 4001,
     SALT_ROUNDS: 10,
     SECRET: 'examSecrets',
     DB: 'mongodb://localhost/kuzmov_exam',
