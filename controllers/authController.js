@@ -10,9 +10,8 @@ const isGuest = require('../middlewares/isGuest');
 router.get('/login',(req, res) => {
     res.render('login', {title: 'Login'});
 })
-router.post('/login',async (req, res)=>{
-    const {username, password} = req.body;
-
+router.post('/login', async (req, res)=>{
+    const { username, password } = req.body;
     try {
         let token = await authService.login({username, password})
 
