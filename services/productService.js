@@ -1,6 +1,6 @@
 const Product = require('../models/Product');
 
-async function getAll(query){
+async function getAll(){
     let products = await Product.find({}).lean()
     return products;
 }

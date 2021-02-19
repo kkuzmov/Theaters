@@ -1,4 +1,3 @@
-// CHECKED!!
 const express = require('express');
 const handlebars = require('express-handlebars');
 const auth = require('../middlewares/auth');

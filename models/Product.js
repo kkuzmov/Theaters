@@ -20,11 +20,11 @@ const productSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    createdAt:[{
+    createdAt:{
         type: Date,
         default: Date.now,
         required: true,
-    }],
+    },
     usersLiked: []
 })
 

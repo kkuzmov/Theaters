@@ -15,8 +15,8 @@
         <h1>Best Rated Plays</h1>
         <div class="theaters-container">
             {{#if plays}}
-            {{#each play}}
-            {{> play}}
+            {{#each plays}}
+            {{> play-guest}}
             {{/each}}
             {{else}}
                 <h4>No plays yet...</h4>
