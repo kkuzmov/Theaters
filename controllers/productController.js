@@ -77,6 +77,26 @@ router.get('/:productId/like', isAuthenticated,(req, res)=>{
         })
         .catch(err => console.log(err))
 })
+router.get('/sort-by-date', (req, res)=>{
+    productService.getAll()
+        .then(plays =>{
+                plays = plays.filter(play => play.isPublic === true).sort((a, b)=> a.createdAt - b.createdAt);
+                res.render('user-home', {title: 'Home', plays})
+        })
+        .catch(err =>{
+            res.render('user-home', {error: {message: err}}).redirect('/')
+        })
+})
+router.get('/sort-by-likes', (req, res)=>{
+    productService.getAll()
+        .then(plays =>{
+            plays = plays.sort((a,b)=> b.usersLiked.length - a.usersLiked.length).slice(0, 1);
+            res.render('user-home', {title: 'Guest-Home', plays})
+        })
+        .catch(err =>{
+            res.render('user-home', {error: {message: err}}).redirect('/')
+        })
+})
 
 
 
