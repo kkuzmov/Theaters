@@ -11,7 +11,7 @@ async function register({username, password}) {
     if(repeatUser){
         throw {message: 'Username already in use!'};
     }
-    const user = new User({username,password: hash}); 
+    const user = new User({username, password}); 
     return await user.save();
 }
 async function login({username,password}){

@@ -25,13 +25,11 @@ router.post('/login',async (req, res)=>{
 router.get('/register',(req, res) => {
     res.render('register', {title: 'Register'})
 })
-router.post('/register',async (req, res) => {
-    const {username, password, repeatPassword } = req.body;
-
-    // AKO E НУЖНО ВЕДНАГА ДА Е ЛОГНАТ, ПРОВЕРИ В BOOKING_UNI - ТАМ Е НАСТРОЕНО
+router.post('/register', async (req, res) => {
+    const { username, password, repeatPassword } = req.body;
 
     if(password !== repeatPassword){
-        res.status(401).render('register', {message: 'Passwords do not match!'});
+        res.status(401).render('register', {error :{message: 'Passwords do not match!'}});
         return;
     }
     try {
