@@ -26,7 +26,9 @@ router.get('/:productId/details', (req, res)=>{
         productService.getOne(req.params.productId)
             .then(play =>{
                 let isCreator = play.creator === req.user._id;
-                res.render('theater-details', {title: 'Details', play, isCreator})
+                let isLikedByThisUser = play.usersLiked.includes(req.user._id);
+
+                res.render('theater-details', {title: 'Details', play, isCreator, isLikedByThisUser})
             })
 })
 router.get('/:productId/edit', (req, res)=>{
@@ -54,6 +56,18 @@ router.get('/:productId/delete', (req, res)=>{
                 res.redirect('/')
             })
             .catch(err => console.log(err))
+})
+router.get('/:productId/like', (req, res)=>{
+    productService.getOne(req.params.productId)
+        .then(play =>{
+            play.usersLiked.push(req.user._id)
+            productService.updateOne(req.params.productId, play)
+                .then(response =>{
+                    res.redirect(`/products/${req.params.productId}/details`);
+                })
+                .catch(err => {console.log(err)})
+        })
+        .catch(err => console.log(err))
 })
 
 
