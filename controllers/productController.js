@@ -36,7 +36,14 @@ router.get('/:productId/edit', (req, res)=>{
         })
 })
 router.post('/:productId/edit', (req, res)=>{
-    
+        let dataToSend = req.body;
+        console.log(dataToSend);
+        dataToSend.isPublic === 'on' ? dataToSend.isPublic = true : dataToSend.isPublic = false;
+        productService.updateOne(req.params.productId, dataToSend)
+            .then(updated =>{
+                res.redirect(`/products/${req.params.productId}/details`);
+            })
+            .catch(err =>{console.log(err)})
 })
 router.get('/:productId/buy', (req, res)=>{
 
