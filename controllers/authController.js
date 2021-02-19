@@ -7,10 +7,10 @@ const isGuest = require('../middlewares/isGuest');
 
 //ВТОРИЯТ ПАРАМЕТЪР НА .GET Е MIDDLEWARE - ВНИМАВАЙ ДАЛИ ГО ИЗПОЛЗВАШ!
 
-router.get('/login',(req, res) => {
+router.get('/login',isGuest,(req, res) => {
     res.render('login', {title: 'Login'});
 })
-router.post('/login', async (req, res)=>{
+router.post('/login', isGuest, async (req, res)=>{
     const { username, password } = req.body;
     try {
         let token = await authService.login({username, password})
@@ -21,10 +21,10 @@ router.post('/login', async (req, res)=>{
         res.status(404).render('login', {error});
     }
 })
-router.get('/register',(req, res) => {
+router.get('/register',isGuest,(req, res) => {
     res.render('register', {title: 'Register'})
 })
-router.post('/register', async (req, res) => {
+router.post('/register',isGuest, async (req, res) => {
     const { username, password, repeatPassword } = req.body;
 
     if(password !== repeatPassword){
@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
         return;
     }
 })
-router.get('/logout', (req, res)=>{
+router.get('/logout', isAuthenticated,(req, res)=>{
     res.clearCookie(COOKIE_NAME);
     res.redirect('/')
 })
