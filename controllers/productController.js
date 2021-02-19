@@ -22,7 +22,10 @@ router.post('/create', (req, res) => {
 
 })
 router.get('/:productId/details', (req, res)=>{
-    
+        productService.getOne(req.params.productId)
+            .then(play =>{
+                res.render('theater-details', {title: 'Details', play})
+            })
 })
 router.get('/:productId/edit', (req, res)=>{
     
