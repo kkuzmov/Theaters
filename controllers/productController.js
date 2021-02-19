@@ -15,6 +15,7 @@ router.get('/create', (req, res) => {
 })
 router.post('/create', (req, res) => {
     req.body.isPublic === 'on' ? req.body.isPublic = true : req.body.isPublic = false;
+    req.body.creator = req.user._id
     productService.createProduct(req.body)
         .then(play =>{
             res.redirect('/');
@@ -24,11 +25,15 @@ router.post('/create', (req, res) => {
 router.get('/:productId/details', (req, res)=>{
         productService.getOne(req.params.productId)
             .then(play =>{
-                res.render('theater-details', {title: 'Details', play})
+                let isCreator = play.creator === req.user._id;
+                res.render('theater-details', {title: 'Details', play, isCreator})
             })
 })
 router.get('/:productId/edit', (req, res)=>{
-    
+    productService.getOne(req.params.productId)
+        .then(play =>{
+            res.render('edit-theater', {title: 'Edit a play', play})
+        })
 })
 router.post('/:productId/edit', (req, res)=>{
     
@@ -37,7 +42,11 @@ router.get('/:productId/buy', (req, res)=>{
 
 })
 router.get('/:productId/delete', (req, res)=>{
-    
+        productService.deleteOne(req.params.productId)
+            .then(del =>{
+                res.redirect('/')
+            })
+            .catch(err => console.log(err))
 })
 
 
