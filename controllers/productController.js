@@ -11,10 +11,14 @@ router.get('/', (req, res) => {
     res.redirect('/');
 })
 router.get('/create', (req, res) => {
-        res.render('create', {title: 'Create a new product'});
+        res.render('create-theater', {title: 'Create a new play'});
 })
 router.post('/create', (req, res) => {
-
+    req.body.isPublic === 'on' ? req.body.isPublic = true : req.body.isPublic = false;
+    productService.createProduct(req.body)
+        .then(play =>{
+            res.redirect('/');
+        })
 
 })
 router.get('/:productId/details', (req, res)=>{
