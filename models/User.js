@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
         // validate: {
         //     validator: (value) =>{
         //         return ENGLISH_ALPHANUMERIC_PATTERN.test(value);
@@ -30,7 +31,8 @@ const userSchema = new mongoose.Schema({
         //         return `Password must consist only of english letters and digits`
         //     }
         // }
-    }
+    },
+    likedPlays: []
 })
 
 
