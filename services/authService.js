@@ -7,6 +7,7 @@ const { SECRET, SALT_ROUNDS } = require('../config/config')
 // ВНИМАВАЙ КАКВО СЛАГАШ В COOKIE КАТО ГО ВРЪЩАШ!!
 
 async function register({username, password}) { 
+    username = username.toLowerCase();
     const repeatUser = await User.findOne({username})
     if(repeatUser){
         throw {message: 'Username already in use!'};

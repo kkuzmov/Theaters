@@ -18,8 +18,8 @@ router.post('/create', isAuthenticated, (req, res) => {
         .then(play =>{
             res.redirect('/');
         })
-        .catch(err=>{
-            res.status(405).render('create-theater', {error: {message: err}})
+        .catch(error=>{
+            res.status(405).render('create-theater', {error})
         })
 
 })

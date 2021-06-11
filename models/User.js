@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     id: mongoose.Types.ObjectId,
     username: {
         type: String,
-        required: true,
+        required: [true, 'Please type an username'],
         unique: true,
         minlength: 3,
         validate: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: [true, 'Please type a password'],
         minlength: 3,
         validate: {
             validator: (value) =>{
